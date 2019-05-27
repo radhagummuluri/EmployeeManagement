@@ -1,0 +1,45 @@
+﻿@model EmployeeManagement.Data.Entities.Employee
+
+@{
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    ViewData["Title"] = "Index";
+}
+
+<h4>List of Dependents for @Model.FullName</h4>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Relationship
+            </th>
+            <th><a asp-action="AddOrEdit" asp-route-id="@Model.EmployeeId" class="btn btn-outline-success"><i class="fa fa-plus-square"></i>  Dependent</a></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Dependents)
+        {
+            var parms = new Dictionary<string, string>
+            {
+                { "id", item.EmployeeId.ToString() },
+                { "dependentId", item.DependentId.ToString() }
+            };
+            
+            <tr style="cursor:pointer;" onclick="location.href = '@(Url.Action("AddOrEdit", "Dependent", new { id = item.EmployeeId, dependentId = item.DependentId}))'">
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Relationship)
+                </td>
+                <td>
+                    <a asp-action="AddOrEdit" asp-all-route-data="parms"><i class="fa fa-pen"></i></a> |
+                    <a asp-action="Delete" asp-all-route-data="parms" onclick="return confirm('Are you sure you want to delete this record?')"><i class="fa fa-trash"></i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

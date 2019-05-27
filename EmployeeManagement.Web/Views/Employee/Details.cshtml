@@ -1,0 +1,49 @@
+﻿@model EmployeeManagement.Data.Entities.Employee
+
+@{
+    Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+    ViewData["Title"] = "Details";
+}
+
+<div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Employee Details</h4>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+            <dl class="row">
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.FullName)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.FullName)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.Position)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.Position)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.HireDate)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.HireDate)
+                </dd>
+                <dt class="col-sm-4">
+                    @Html.DisplayNameFor(model => model.OfficeLocation)
+                </dt>
+                <dd class="col-sm-8">
+                    @Html.DisplayFor(model => model.OfficeLocation)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-3">
+            <a asp-action="Edit" asp-route-id="@Model.EmployeeId" class="btn btn-secondary"><i class="fa fa-pen"></i> Edit</a>
+        </div>
+    </div>
+</div>

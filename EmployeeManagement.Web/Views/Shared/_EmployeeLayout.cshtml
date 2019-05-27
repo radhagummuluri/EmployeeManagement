@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-md-3">
+        <a asp-controller="Employee" asp-action="Details" asp-route-id="@Model.EmployeeId">Employee Details</a> <br />
+        <a asp-controller="Dependent" asp-action="Index" asp-route-id="@Model.EmployeeId">Dependents</a> <br />
+        <a asp-controller="PayrollPreview" asp-action="Index" asp-route-id="@Model.EmployeeId">Payroll Preview</a>
+    </div>
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+</div>
+@RenderSection("Scripts", required: false)

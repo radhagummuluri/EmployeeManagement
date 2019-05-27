@@ -5,3 +5,5 @@ EmployeeManagement.Data/bin/
 EmployeeManagement.Data/obj/
 EmployeeManagement.Web/bin/
 EmployeeManagement.Web/obj/
+EmployeeManagement.Tests/bin/
+EmployeeManagement.Tests/obj/

@@ -1,9 +1,103 @@
-﻿@model EmployeeManagement.Data.Entities.Employee
+﻿@model PayrollPreviewViewModel
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_EmployeeLayout.cshtml";
+
+    int i = 0;
 }
 
-<h1>Index</h1>
+<h4>Payroll preview for @Model.EmployeeName </h4>
+<div>
+    Number of Pay previews for the year @Model.Year: @Model.PayrollPreviewDetails.Count()
+</div>
 
+<div class="accordion" id="accordion">
+
+    @foreach (var item in Model.PayrollPreviewDetails)
+    {
+        i = i+1;
+        var hashName = "#collapse" + i;
+        var ariaName = "collapse" + i;
+        <div class="card borderBottom" >
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <button class="btn btn-link detailBtn" type="button" data-toggle="collapse" data-target="@{@hashName}" aria-expanded="true" aria-controls="@{@ariaName}">
+                        Show Details
+                    </button>
+                </h5>
+                <table class="table">
+                        <tr class="details header">
+                            <td>
+                                Pay Period Start Date
+                            </td>
+                            <td>
+                                Pay Period End Date
+                            </td>
+                            <td>
+                                Gross Salary
+                            </td>
+                            <td>
+                                Total Deductions
+                            </td>
+                            <td>
+                                Net Salary
+                            </td>
+                        </tr>
+                    
+                        <tr class="details">
+                            <td>
+                                @item.PayStart
+                            </td>
+                            <td>
+                                @item.PayEnd
+                            </td>
+                            <td>
+                                @item.GrossSalaryForPayPeriod
+                            </td>
+                            <td>
+                                @item.TotalDeductionForPayPeriod
+                            </td>
+                            <td>
+                                @item.NetSalaryForPayPeriod
+                            </td>
+                        </tr>
+                </table>
+            </div>
+
+            <div id="@{@ariaName}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                <div class="card-body">
+                    
+                    <table class="table" >
+                        <tr class="details header">
+                            <td>
+                                Name
+                            </td>
+                            <td>
+                                Relationship
+                            </td>
+                            <td>
+                                Deduction Amount
+                            </td>
+                        </tr>
+                        @foreach (var deductionDetail in item.DeductionDetails)
+                        {
+                        <tr class="details">
+                            <td>
+                                @deductionDetail.Name
+                            </td>
+                            <td>
+                                @deductionDetail.Relationship
+                            </td>
+                            <td>
+                                @deductionDetail.TotalDeductionForPayPeriod
+                            </td>
+                        </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+        <br>
+    }
+</div>

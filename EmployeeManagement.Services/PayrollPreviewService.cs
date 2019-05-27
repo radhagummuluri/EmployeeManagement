@@ -14,6 +14,7 @@ namespace EmployeeManagement.Services
     {
         Task CalculatePayrollPreview(Employee employee, DateTime firstPayPeriodStartWorkDayCurrentYr, int currentYear);
         Task DeleteDeductionsAndPreview(int employeeId);
+        Task<ICollection<PayrollPreview>> GetPayrollPreviewForEmployee(int employeeId, int year);
     }
     public class PayrollPreviewService : IPayrollPreviewService
     {
@@ -158,6 +159,18 @@ namespace EmployeeManagement.Services
 
                 payrollPreviews.Add(depPayPreview);
             }
+        }
+
+        public async Task<ICollection<PayrollPreview>> GetPayrollPreviewForEmployee(int employeeId, int year)
+        {
+            var eeAnnualDed = await _context.EmployeeAnnualDeductions.FirstOrDefaultAsync(d => d.EmployeeId == employeeId && d.PayYear == year);
+
+            if(eeAnnualDed !=null)
+            {
+                return await _context.PayrollPreviews.Where(pp => pp.EmployeeAnnualDeductionId == eeAnnualDed.EmployeeAnnualDeductionId).ToListAsync();
+            }
+
+            return new List<PayrollPreview>();
         }
     }
 }

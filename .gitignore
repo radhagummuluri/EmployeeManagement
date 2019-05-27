@@ -1,1 +1,7 @@
 .vs/
+EmployeeManagement.Services/bin/
+EmployeeManagement.Services/obj/
+EmployeeManagement.Data/bin/
+EmployeeManagement.Data/obj/
+EmployeeManagement.Web/bin/
+EmployeeManagement.Web/obj/

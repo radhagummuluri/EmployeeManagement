@@ -2,10 +2,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3" style="background-color:lightgrey;">
+        <div style="height:50px;"></div>
         <a asp-controller="Employee" asp-action="Details" asp-route-id="@Model.EmployeeId">Employee Details</a> <br />
         <a asp-controller="Dependent" asp-action="Index" asp-route-id="@Model.EmployeeId">Dependents</a> <br />
         <a asp-controller="PayrollPreview" asp-action="Index" asp-route-id="@Model.EmployeeId">Payroll Preview</a>
+        <div style="height:50px;"></div>
     </div>
     <div class="col-md-9">
         @RenderBody()

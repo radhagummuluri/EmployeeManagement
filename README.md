@@ -60,8 +60,8 @@ The solution consists of the following projects:
 	
 Assumptions:
 - Employee makes $2000 per pay period
-- Employee deduction is $1000/ year and $900 if name starts with "A" (case insensitive)
-- Dependent deduction is $500/ year and $450 if name starts with "A" (case insensitive)
+- Employee deduction is $1000/ year (for 26 pay periods) and 10% discount ($900) if name starts with "A" (case insensitive)
+- Dependent deduction is $500/ year (for 26 pay periods) and 10% discount ($450) if name starts with "A" (case insensitive)
 - There are 26 pay periods in a year. 
 - Employee Pay schedule is calculated for the current year only (2019). Anyone with date of hire on or before 12/31/2018 has 26 pay periods in 2019.
 - Prorated the employee deductions based on hire date, if they do not have all 26 pay previews for the current year.

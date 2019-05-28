@@ -37,7 +37,7 @@ namespace EmployeeManagement.Services
         public decimal EeRateOfDedPerWorkDay => Convert.ToDecimal(TotalExpectedEEDed / EmpWorkDaysInCurrentYear).CeilingWithPrecision(2);
 
         //calculate the total expected Dep deduction without discount y = (work days * 500)/260 
-        public decimal TotalExpectedDepDecWODiscount => Convert.ToDecimal((EmpWorkDaysInCurrentYear * Constants.DEP_ANNUAL_DEDUCTION) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);
+        public decimal TotalExpectedDepDecWODiscount => Convert.ToDecimal(((double)EmpWorkDaysInCurrentYear * Constants.DEP_ANNUAL_DEDUCTION) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);
 
         //calculate the total expected Dep deduction with discount y = (work days * 450)/260
         public decimal TotalExpectedDepDecWithDiscount => Convert.ToDecimal((EmpWorkDaysInCurrentYear * DepDedDiscountVal) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);

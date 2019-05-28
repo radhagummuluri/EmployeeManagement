@@ -85,7 +85,7 @@ namespace EmployeeManagement.Tests.Services
             Assert.Equal(3.85m, employeeCalculationDetails.EeRateOfDedPerWorkDay);
             Assert.False(employeeCalculationDetails.EmpHasDiscount);
             Assert.Equal(242, employeeCalculationDetails.EmpWorkDaysInCurrentYear);
-            Assert.Equal(465, employeeCalculationDetails.TotalExpectedDepDecWODiscount);
+            Assert.Equal(465.39m, employeeCalculationDetails.TotalExpectedDepDecWODiscount);
             Assert.Equal(418.85m, employeeCalculationDetails.TotalExpectedDepDecWithDiscount);
             Assert.Equal(930.77m, employeeCalculationDetails.TotalExpectedEEDed);
         }
@@ -112,7 +112,7 @@ namespace EmployeeManagement.Tests.Services
             Assert.Equal(3.47m, employeeCalculationDetails.EeRateOfDedPerWorkDay);
             Assert.True(employeeCalculationDetails.EmpHasDiscount);
             Assert.Equal(242, employeeCalculationDetails.EmpWorkDaysInCurrentYear);
-            Assert.Equal(465, employeeCalculationDetails.TotalExpectedDepDecWODiscount);
+            Assert.Equal(465.39m, employeeCalculationDetails.TotalExpectedDepDecWODiscount);
             Assert.Equal(418.85m, employeeCalculationDetails.TotalExpectedDepDecWithDiscount);
             Assert.Equal(837.70m, employeeCalculationDetails.TotalExpectedEEDed);
         }

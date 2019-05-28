@@ -76,7 +76,19 @@ namespace EmployeeManagement.Services
             }
         }
 
-        public void CalculatePayrollPreviewForPayPeriod(PayPeriod payPeriod, Employee employee, ICollection<PayrollPreview> payrollPreviews,
+        public async Task<ICollection<PayrollPreview>> GetPayrollPreviewForEmployee(int employeeId, int year)
+        {
+            var eeAnnualDed = await _context.EmployeeAnnualDeductions.FirstOrDefaultAsync(d => d.EmployeeId == employeeId && d.PayYear == year);
+
+            if (eeAnnualDed != null)
+            {
+                return await _context.PayrollPreviews.Where(pp => pp.EmployeeAnnualDeductionId == eeAnnualDed.EmployeeAnnualDeductionId).ToListAsync();
+            }
+
+            return new List<PayrollPreview>();
+        }
+
+        private void CalculatePayrollPreviewForPayPeriod(PayPeriod payPeriod, Employee employee, ICollection<PayrollPreview> payrollPreviews,
             EmployeeAnnualDeduction employeeAnnualDed, EmployeeCalculationDetails employeeCalculationDetails, List<PayPeriod> employeePayPeriodRangesForCurrentYear)
         {
             
@@ -85,11 +97,15 @@ namespace EmployeeManagement.Services
                 //first pay check calculate the gross pay = (number of days first week * 8 * $25) 
                 //first pay check calculate the EE deduction based on number of days  = (number of days first week * EEDed)
                 //first pay check calculate the DEP deduction(s) based on number of days = (number of days first week * DEPDed)
-                var numWorkingDaysFirstPeriod = employee.HireDate.GetNumberOfWorkingDaysUntilDate(employeePayPeriodRangesForCurrentYear.First().EndDate);
+                var startDate = employee.HireDate.Date <= employeePayPeriodRangesForCurrentYear.First().StartDate
+                    ? employeePayPeriodRangesForCurrentYear.First().StartDate
+                    : employee.HireDate;
+
+                var numWorkingDaysFirstPeriod = startDate.GetNumberOfWorkingDaysUntilDate(employeePayPeriodRangesForCurrentYear.First().EndDate);
 
                 CalculatePayrollPreview(employee, payrollPreviews,
                     employeeAnnualDed, employeeCalculationDetails,
-                    numWorkingDaysFirstPeriod, employee.HireDate, employeePayPeriodRangesForCurrentYear.First().EndDate, false);
+                    numWorkingDaysFirstPeriod, startDate, employeePayPeriodRangesForCurrentYear.First().EndDate, false);
             }
             else if (payPeriod.EndDate == employeePayPeriodRangesForCurrentYear.Last().EndDate)
             {
@@ -114,7 +130,7 @@ namespace EmployeeManagement.Services
             }
         }
 
-        public void CalculatePayrollPreview(Employee employee, ICollection<PayrollPreview> payrollPreviews, 
+        private void CalculatePayrollPreview(Employee employee, ICollection<PayrollPreview> payrollPreviews, 
             EmployeeAnnualDeduction employeeAnnualDed, EmployeeCalculationDetails employeeCalculationDetails,
             int numWorkingDaysForPayPeriod, DateTime payrollStartDt, DateTime payrollEndDate, bool isLastPayPeriod)
         {
@@ -161,18 +177,6 @@ namespace EmployeeManagement.Services
 
                 payrollPreviews.Add(depPayPreview);
             }
-        }
-
-        public async Task<ICollection<PayrollPreview>> GetPayrollPreviewForEmployee(int employeeId, int year)
-        {
-            var eeAnnualDed = await _context.EmployeeAnnualDeductions.FirstOrDefaultAsync(d => d.EmployeeId == employeeId && d.PayYear == year);
-
-            if(eeAnnualDed !=null)
-            {
-                return await _context.PayrollPreviews.Where(pp => pp.EmployeeAnnualDeductionId == eeAnnualDed.EmployeeAnnualDeductionId).ToListAsync();
-            }
-
-            return new List<PayrollPreview>();
         }
     }
 }

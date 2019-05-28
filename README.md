@@ -72,7 +72,7 @@ Assumptions:
 - Dependent deduction is $500/ year (for 26 pay periods) and 10% discount ($450) if name starts with "A" (case insensitive)
 - There are 26 pay periods in a year. 
 - Employee Pay schedule is calculated for the current year only (2019). Anyone with date of hire on or before 12/31/2018 has 26 pay periods in 2019.
-- Prorated the employee deductions based on hire date, if they do not have all 26 pay previews for the current year.
+- Prorated the employee and dependent deductions based on employee hire date,i.e. if they have less than 26 pay previews for the current year.
 - Qualifying events such as addition of a dependent/ marriage etc. at a later date in the year are not considered. 
   The application recalculates the payroll preview with deductions for the entire year if employee information changes or when dependents are added or removed.
 

@@ -1,6 +1,6 @@
-# EmployeeManagement
+# Employee Management
 This solution is for managing employees and dependents and get a preview of the payroll for every period.
-Along with providing facility to create/read/update/delete employee and dependents this application calculates the pay preview per period.
+Along with providing facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period.
 The pay preview screen presents the following information per pay period:
 - pay period beginning date
 - pay period end date
@@ -16,11 +16,11 @@ The pay preview screen presents the following information per pay period:
 
 Basic Design Goals: 
 - Solution has a layered architecture where every layer has specific responsibility/concerns.
-- UI is intuitive to use
+- UI should be intuitive to use
 - Decouple the code between layers using dependency injection framework
 - Add test coverage to improve code reliability
 
-This solution is split into multi layers with specific responsibilities and has UI, Business Logic (BLL) and Data Access (DAL) layers.
+This solution is split into multiple layers with specific responsibilities. It has has UI, Business Logic (BLL) and Data Access (DAL) layers.
 The solution consists of the following projects:
 
 1. EmployeeManagement.Web 
@@ -49,7 +49,7 @@ Assumptions:
 - Dependent deduction is $500/ year and $450 if name starts with "A" (case insensitive)
 - There are 26 pay periods in a year. 
 - Employee Pay schedule is calculated for the current year only (2019). Anyone with date of hire on or before 12/31/2018 has 26 pay periods in 2019.
-- Prorated the employee deductions based on hire date if they do not have all 26 pay previews for the year.
+- Prorated the employee deductions based on hire date, if they do not have all 26 pay previews for the current year.
 - Qualifying events such as addition of a dependent/ marriage etc. at a later date in the year are not considered. 
   The application recalculates the payroll preview with deductions for the entire year if employee information changes or when dependents are added or removed.
 

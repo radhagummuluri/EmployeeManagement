@@ -14,6 +14,21 @@ The pay preview screen presents the following information per pay period:
 - deduction amount per census type (employee/dependents)
 - year to date deduction amount per census type
 
+Instructions:
+Clone the solution repository locally
+Change the connection string in application.json file (if needed)
+In Visual studio package manager set the default project to src\EmployeeManagement.Web
+Run the command "Update-Migration" in the Package Manager console
+Set EmployeeManagement.Web as the starting project and run the application from visual studio and the application opens in the browser.
+
+Application usage:
+Initial screen is the employee list page. 
+One can create an employee and edit/view details/delete the employee from the grid.
+Clicking into an employee row, will open the details screen. 
+One can create/edit dependents from here. 
+Clicking on the payroll preview link will display all payrolls(with deductions) for all the pay periods for the current year.
+We can drill into details in each pay period, by clicking on the show details link. This should show deduction details per census (employee/dependent)
+
 Basic Design Goals: 
 - Solution has a layered architecture where every layer has specific responsibility/concerns.
 - UI should be intuitive to use
@@ -57,6 +72,8 @@ Ways to improve the basic version of this application:
 - Add authentication/authorization feature.
 - Have seperate secure micro service for employee management (CRUD operations) and another microservice for payroll preview calculation,
   so that each service can be containerized and the application can scale better.
-- Add caching using Redis to cache data that does not change much and can be used across micro-services.
+- Add caching using Redis to cache data/api calls that do not change much and can be used across micro-services.
 - Add logging to splunk/stackify for non development environments.
 - Add integration tests to test the microservice webapis.
+
+

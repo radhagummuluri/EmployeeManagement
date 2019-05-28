@@ -76,7 +76,7 @@ Assumptions:
 - Qualifying events such as addition of a dependent/ marriage etc. at a later date in the year are not considered. 
   The application recalculates the payroll preview with deductions for the entire year if employee information changes or when dependents are added or removed.
 
-Ways to improve the basic version of this application:
+Ways to improve the present version of this application:
 - Add authentication/authorization feature.
 - Have seperate secure micro service for employee management (CRUD operations) and another microservice for payroll preview calculation,
   so that each service can be containerized and the application can scale better.

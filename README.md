@@ -1,6 +1,6 @@
 # Employee Management
 This solution is for managing employees and dependents and get a preview of the payroll for every period.
-Along with providing a facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period which includes benefit
+Along with providing a facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period, which includes benefit
 deductions for employee and dependents.
 The pay preview screen presents the following information per pay period:
 - pay period beginning date
@@ -18,7 +18,7 @@ The pay preview screen presents the following information per pay period:
 Instructions:
 - Clone the solution repository locally.
 - Change the connection string in application.json file (if needed)
-- In Visual studio package manager set the default project to src\EmployeeManagement.Web
+- After opening the solution in Visual studio, in Package Manager console, set the default project to src\EmployeeManagement.Web
 - Run the command "Update-Migration" in the Package Manager console
 - Set EmployeeManagement.Web as the starting project and run the application from visual studio and the application opens in the browser.
 

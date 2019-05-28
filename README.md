@@ -15,19 +15,19 @@ The pay preview screen presents the following information per pay period:
 - year to date deduction amount per census type
 
 Instructions:
-Clone the solution repository locally
-Change the connection string in application.json file (if needed)
-In Visual studio package manager set the default project to src\EmployeeManagement.Web
-Run the command "Update-Migration" in the Package Manager console
-Set EmployeeManagement.Web as the starting project and run the application from visual studio and the application opens in the browser.
+- Clone the solution repository locally.
+- Change the connection string in application.json file (if needed)
+- In Visual studio package manager set the default project to src\EmployeeManagement.Web
+- Run the command "Update-Migration" in the Package Manager console
+- Set EmployeeManagement.Web as the starting project and run the application from visual studio and the application opens in the browser.
 
 Application usage:
-Initial screen is the employee list page. 
-One can create an employee and edit/view details/delete the employee from the grid.
-Clicking into an employee row, will open the details screen. 
-One can create/edit dependents from here. 
-Clicking on the payroll preview link will display all payrolls(with deductions) for all the pay periods for the current year.
-We can drill into details in each pay period, by clicking on the show details link. This should show deduction details per census (employee/dependent)
+- Initial screen is the employee list page. 
+- One can create an employee and edit/view details/delete the employee from the grid.
+- Clicking into an employee row, will open the details screen. 
+- One can create/edit dependents from here. 
+- Clicking on the payroll preview link will display all payrolls(with deductions) for all the pay periods for the current year.
+- We can drill into details in each pay period, by clicking on the show details link. This should show deduction details per census (employee/dependent)
 
 Basic Design Goals: 
 - Solution has a layered architecture where every layer has specific responsibility/concerns.

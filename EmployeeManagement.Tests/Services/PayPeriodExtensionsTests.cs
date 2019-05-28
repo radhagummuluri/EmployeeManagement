@@ -1,7 +1,6 @@
 ﻿using EmployeeManagement.Services.Util;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace EmployeeManagement.Tests.Services

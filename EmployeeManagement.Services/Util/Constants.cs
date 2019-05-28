@@ -1,4 +1,4 @@
-﻿namespace EmployeeManagement.Data.Util
+﻿namespace EmployeeManagement.Services.Util
 {
     public static class Constants
     {

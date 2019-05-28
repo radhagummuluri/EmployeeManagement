@@ -1,6 +1,6 @@
 ﻿using EmployeeManagement.Data.Entities;
 using EmployeeManagement.Data.Sql.Entities;
-using EmployeeManagement.Data.Util;
+using EmployeeManagement.Services.Util;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

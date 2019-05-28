@@ -5,6 +5,7 @@ using System.Net;
 using System.Threading.Tasks;
 using EmployeeManagement.Data.Sql.Entities;
 using EmployeeManagement.Services;
+using EmployeeManagement.Web.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -47,6 +48,7 @@ namespace EmployeeManagement.Web
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDependentService, DependentService>();
             services.AddScoped<IPayrollPreviewService, PayrollPreviewService>();
+            services.AddScoped<IPayrollPreviewHelper, PayrollPreviewHelper>();
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace EmployeeManagement.Data.Util
+namespace EmployeeManagement.Services.Util
 {
     public static class PayPeriodExtensions
     {

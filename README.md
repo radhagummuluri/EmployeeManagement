@@ -74,7 +74,7 @@ Assumptions:
 - Employee Pay schedule is calculated for the current year only (2019). Anyone with date of hire on or before 12/31/2018 has 26 pay periods in 2019.
 - Prorated the employee and dependent deductions based on employee hire date,i.e. if they have less than 26 pay previews for the current year.
 - Qualifying events such as addition of a dependent/ marriage etc. at a later date in the year are not considered. 
-  The application recalculates the payroll preview with deductions for the entire year if employee information changes or when dependents are added or removed.
+  The application re-calculates the payroll preview with deductions for the entire year if employee information changes or when dependents are added or removed.
 
 Ways to improve the present version of this application:
 - Add authentication/authorization feature.

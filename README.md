@@ -1,18 +1,19 @@
 # Employee Management
 This solution is for managing employees and dependents and get a preview of the payroll for every period.
-Along with providing facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period.
+Along with providing a facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period which includes benefit
+deductions for employee and dependents.
 The pay preview screen presents the following information per pay period:
 - pay period beginning date
 - pay period end date
 - number of work hours in the pay period
 - employee pay rate/hr
 - gross salary per pay period
-- total deductions for the pay period
+- total benefit deductions for the pay period
 - net salary per pay period
 - Year to date gross salary
 - Year to date net salary
-- deduction amount per census type (employee/dependents)
-- year to date deduction amount per census type
+- benefit deduction amount per census type (employee/dependents)
+- year to date benefit deduction amount per census type
 
 Instructions:
 - Clone the solution repository locally.

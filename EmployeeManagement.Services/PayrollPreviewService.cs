@@ -125,6 +125,8 @@ namespace EmployeeManagement.Services
             eePayPreview.NameBasedDiscount = employeeCalculationDetails.EmpHasDiscount;
             eePayPreview.PayrollStartDate = payrollStartDt;
             eePayPreview.PayRollEndDate = payrollEndDate;
+            eePayPreview.EmployeePayPerHour = employeeCalculationDetails.EePayPerHr;
+            eePayPreview.NumberOfWorkHoursForPayPeriod = numWorkingDaysForPayPeriod * 8;
 
             eePayPreview.TotalDeductionForPayPeriod = !isLastPayPeriod ? numWorkingDaysForPayPeriod * employeeCalculationDetails.EeRateOfDedPerWorkDay
                 : (employeeCalculationDetails.TotalExpectedEEDed - payrollPreviews.Where(x => x.DependentId == 0).Sum(x => x.TotalDeductionForPayPeriod));

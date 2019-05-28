@@ -27,47 +27,63 @@
                     </button>
                 </h5>
                 <table class="table">
-                        <tr class="details header">
-                            <td>
-                                Pay Period Start Date
-                            </td>
-                            <td>
-                                Pay Period End Date
-                            </td>
-                            <td>
-                                Gross Salary
-                            </td>
-                            <td>
-                                Total Deductions
-                            </td>
-                            <td>
-                                Net Salary
-                            </td>
-                        </tr>
+                    <tr class="details header">
+                        <td>
+                            Period Beginning
+                        </td>
+                        <td>
+                            Period End
+                        </td>
+                        <td>
+                            Hours
+                        </td>
+                        <td>
+                            Pay Rate
+                        </td>
+                        <td>
+                            Gross Salary
+                        </td>
+                        <td>
+                            Total Deductions
+                        </td>
+                        <td>
+                            Net Salary
+                        </td>
+                    </tr>
                     
-                        <tr class="details">
-                            <td>
-                                @item.PayStart
-                            </td>
-                            <td>
-                                @item.PayEnd
-                            </td>
-                            <td>
-                                @item.GrossSalaryForPayPeriod
-                            </td>
-                            <td>
-                                @item.TotalDeductionForPayPeriod
-                            </td>
-                            <td>
-                                @item.NetSalaryForPayPeriod
-                            </td>
-                        </tr>
+                    <tr class="details">
+                        <td>
+                            @item.PayStart
+                        </td>
+                        <td>
+                            @item.PayEnd
+                        </td>
+                        <td>
+                            @item.NumberOfWorkHoursForPayPeriod
+                        </td>
+                        <td>
+                            @item.EmployeePayPerHour
+                        </td>
+                        <td>
+                            @item.GrossSalaryForPayPeriod
+                        </td>
+                        <td>
+                            @item.TotalDeductionForPayPeriod
+                        </td>
+                        <td>
+                            @item.NetSalaryForPayPeriod
+                        </td>
+                    </tr>
                 </table>
             </div>
 
             <div id="@{@ariaName}" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                 <div class="card-body">
-                    
+                    <div>
+                        <span style="font-weight:bold">Year To Date Gross Salary</span>: @item.YearToDateGrossSalary <br/>
+                        <span style="font-weight:bold">Year To Date Net Salary</span>: @item.YearToDateNetSalary
+                    </div>
+                    <br/>
                     <table class="table" >
                         <tr class="details header">
                             <td>
@@ -78,6 +94,9 @@
                             </td>
                             <td>
                                 Deduction Amount
+                            </td>
+                            <td>
+                                Year to Date Deduction Amount
                             </td>
                         </tr>
                         @foreach (var deductionDetail in item.DeductionDetails)
@@ -91,6 +110,9 @@
                             </td>
                             <td>
                                 @deductionDetail.TotalDeductionForPayPeriod
+                            </td>
+                            <td>
+                                @deductionDetail.YearToDateDeduction
                             </td>
                         </tr>
                         }

@@ -35,7 +35,14 @@ namespace EmployeeManagement.Data.Entities
         [Required]
         public bool NameBasedDiscount { get; set; }
 
+        [Required]
+        public decimal EmployeePayPerHour { get; set; }
+
+        [Required]
+        public decimal NumberOfWorkHoursForPayPeriod { get; set; }
+
         public int EmployeeAnnualDeductionId { get; set; }
         public EmployeeAnnualDeduction EmployeeAnnualDeduction { get; set; }
+        
     }
 }

@@ -29,6 +29,13 @@ Application usage:
 - Clicking on the payroll preview link will display all payrolls(with deductions) for all the pay periods for the current year.
 - We can drill into details in each pay period, by clicking on the show details link. This should show deduction details per census (employee/dependent)
 
+Whenever an employee is created/edited or a dependent is created/edited/deleted, the CalculatePayrollPreview flag for the Employee is set to true.
+When the user navigates to the payroll preview page, if CalculatePayrollPreview is set to true, the application will call Payroll Preview service to 
+(re)calculate the payroll previews for the employee for the current year. After completing the calculations, the payroll preview service will set this
+flag CalculatePayrollPreview back to false. This approach decouples the actual payroll preview calculation from the create/edit transaction of employee
+and create/edit/delete transaction of the dependent.
+
+
 Basic Design Goals: 
 - Solution has a layered architecture where every layer has specific responsibility/concerns.
 - UI should be intuitive to use

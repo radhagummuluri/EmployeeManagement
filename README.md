@@ -57,5 +57,6 @@ Ways to improve the basic version of this application:
 - Add authentication/authorization feature.
 - Have seperate secure micro service for employee management (CRUD operations) and another microservice for payroll preview calculation,
   so that each service can be containerized and the application can scale better.
+- Add caching using Redis to cache data that does not change much and can be used across micro-services.
 - Add logging to splunk/stackify for non development environments.
 - Add integration tests to test the microservice webapis.

@@ -34,6 +34,12 @@ namespace EmployeeManagement.Services
             //get 26 payperiodranges since first work day for the current year
             var  payPeriodRangesForCurrentYear = firstPayPeriodStartWorkDayCurrentYr.GetPayPeriodRanges(26);
 
+            if (employee.HireDate > payPeriodRangesForCurrentYear.Last().EndDate)
+            {
+                //no pay previews for the current year.
+                return;
+            }
+
             EmployeeCalculationDetails employeeCalculationDetails = new EmployeeCalculationDetails(employee, payPeriodRangesForCurrentYear);
 
             //Create an entry in the employee Annual deduction for the year
@@ -68,8 +74,11 @@ namespace EmployeeManagement.Services
 
         public async Task DeleteDeductionsAndPreview(int employeeId)
         {
-            var empDed = await _context.EmployeeAnnualDeductions.FirstOrDefaultAsync(d => d.EmployeeId == employeeId);
-            if(empDed!=null)
+            var empDed = await _context.EmployeeAnnualDeductions.
+                Where(d => d.EmployeeId == employeeId)
+                .FirstOrDefaultAsync();
+
+            if (empDed!=null)
             {
                 _context.EmployeeAnnualDeductions.Remove(empDed);
                 await _context.SaveChangesAsync();
@@ -78,7 +87,9 @@ namespace EmployeeManagement.Services
 
         public async Task<ICollection<PayrollPreview>> GetPayrollPreviewForEmployee(int employeeId, int year)
         {
-            var eeAnnualDed = await _context.EmployeeAnnualDeductions.FirstOrDefaultAsync(d => d.EmployeeId == employeeId && d.PayYear == year);
+            var eeAnnualDed = await _context.EmployeeAnnualDeductions
+                .Where(d => d.EmployeeId == employeeId && d.PayYear == year)
+                .FirstOrDefaultAsync();
 
             if (eeAnnualDed != null)
             {

@@ -18,10 +18,12 @@ namespace EmployeeManagement.Services
 
         public bool EmpHasDiscount => Employee.FullName.Trim().StartsWith("a", StringComparison.OrdinalIgnoreCase);
 
+        //not based on actual work days. This is based on the assumption values
         public decimal EeDed => EmpHasDiscount
                 ? (Constants.EE_ANNUAL_DEDUCTION - Constants.EE_ANNUAL_DEDUCTION * Constants.NAME_BASED_DISCOUNT_PERCENT / 100)
                 : Constants.EE_ANNUAL_DEDUCTION;
 
+        //not based on actual work days. This is based on the assumption values
         public decimal DepDedDiscountVal => Convert.ToDecimal(Constants.DEP_ANNUAL_DEDUCTION - Constants.DEP_ANNUAL_DEDUCTION * Constants.NAME_BASED_DISCOUNT_PERCENT / 100).CeilingWithPrecision(2);
 
         //based on the hire date, calculate the employee's number of working days until last pay end date. max will be 260 days for current year.
@@ -30,22 +32,28 @@ namespace EmployeeManagement.Services
             ? Constants.TOTAL_ANNUAL_WORK_DAYS
             : Employee.HireDate.GetNumberOfWorkingDaysUntilDate(PayPeriodRangesForCurrentYear.Last().EndDate);
 
-        //calculate the total expected EE deduction with or without discount x = (work days * eeDed)/260            
+        //calculate the total expected EE deduction with or without discount x = (work days * eeDed)/260
+        //pro rate if less than 260 days
         public decimal TotalExpectedEEDed => Convert.ToDecimal((EmpWorkDaysInCurrentYear * EeDed) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);
 
         //calculate the rate of deduction for EE per day = totalExpectedEEDed / work days
+        //based on pro rated value if less than 260 days
         public decimal EeRateOfDedPerWorkDay => Convert.ToDecimal(TotalExpectedEEDed / EmpWorkDaysInCurrentYear).CeilingWithPrecision(2);
 
         //calculate the total expected Dep deduction without discount y = (work days * 500)/260 
+        //based on pro rated value if less than 260 days
         public decimal TotalExpectedDepDecWODiscount => Convert.ToDecimal(((double)EmpWorkDaysInCurrentYear * Constants.DEP_ANNUAL_DEDUCTION) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);
 
         //calculate the total expected Dep deduction with discount y = (work days * 450)/260
+        //based on pro rated value if less than 260 days
         public decimal TotalExpectedDepDecWithDiscount => Convert.ToDecimal((EmpWorkDaysInCurrentYear * DepDedDiscountVal) / Constants.TOTAL_ANNUAL_WORK_DAYS).CeilingWithPrecision(2);
 
         //calculate the rate of deduction for Dep per day DEPDed = y / work day
+        //based on pro rated value if less than 260 days
         public decimal DepRateOfDedPerWorkDay => Convert.ToDecimal(TotalExpectedDepDecWODiscount / EmpWorkDaysInCurrentYear).CeilingWithPrecision(2);
 
         //calculate the rate of discounted deduction for Dep per day DEPDed = y / work day
+        //based on pro rated value if less than 260 days
         public decimal DepRateOfDedWithDiscPerWorkDay => Convert.ToDecimal(TotalExpectedDepDecWithDiscount / EmpWorkDaysInCurrentYear).CeilingWithPrecision(2);
 
         public EmployeeCalculationDetails(Employee employee, ICollection<PayPeriod> payPeriodRangesForCurrentYear)

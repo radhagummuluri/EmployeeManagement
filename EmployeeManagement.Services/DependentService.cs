@@ -40,7 +40,8 @@ namespace EmployeeManagement.Services
         public async Task<bool> RemoveDependent(int dependentId)
         {
             var dependent = await _context.Dependents
-                .FirstOrDefaultAsync(m => m.DependentId == dependentId);
+                .Where(m => m.DependentId == dependentId)
+                .FirstOrDefaultAsync();
             if (dependent == null)
             {
                 return false;

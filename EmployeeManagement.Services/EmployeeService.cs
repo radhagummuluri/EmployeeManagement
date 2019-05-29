@@ -2,6 +2,7 @@
 using EmployeeManagement.Data.Sql.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeManagement.Services
@@ -33,8 +34,9 @@ namespace EmployeeManagement.Services
         public async Task<Employee> GetEmployee(int employeeId)
         {
             return await _context.Employees
+                .Where(m => m.EmployeeId == employeeId)
                 .Include(e => e.Dependents)
-                .FirstOrDefaultAsync(m => m.EmployeeId == employeeId);
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IList<Employee>> GetEmployees()
@@ -45,7 +47,8 @@ namespace EmployeeManagement.Services
         public async Task<bool> RemoveEmployee(int employeeId)
         {
             var employee = await _context.Employees
-                .FirstOrDefaultAsync(m => m.EmployeeId == employeeId);
+                .Where(m => m.EmployeeId == employeeId)
+                .FirstOrDefaultAsync();
             if (employee == null)
             {
                 return false;

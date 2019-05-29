@@ -67,7 +67,7 @@ The solution consists of the following projects:
 5. Database is set to mssql sqlexpress server instance.
 	
 Assumptions:
-- Employee makes $2000 per pay period
+- All Employees make $2000 per pay period before deduction.
 - Employee deduction is $1000/ year (for 26 pay periods) and 10% discount ($900) if name starts with "A" (case insensitive)
 - Dependent deduction is $500/ year (for 26 pay periods) and 10% discount ($450) if name starts with "A" (case insensitive)
 - There are 26 pay periods in a year. 

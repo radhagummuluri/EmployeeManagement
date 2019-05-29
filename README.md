@@ -82,6 +82,4 @@ Ways to improve the present version of this application:
   so that each service can be containerized and the application can scale better.
 - Add caching using Redis to cache data/api calls that do not change much and can be used across micro-services.
 - Add logging to splunk/stackify for non development environments.
-- Add integration tests to test the microservice webapis.
-
 

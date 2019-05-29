@@ -19,26 +19,33 @@ namespace EmployeeManagement.Web.Helpers
             return payPreviews.OrderBy(pp => pp.PayrollStartDate).GroupBy(
                             p => p.PayrollStartDate,
                             (key, g) =>
-                                new PayrollPreviewDetail()
                                 {
-                                    PayStart = g.First().PayrollStartDate.ToShortDateString(),
-                                    PayEnd = g.First().PayRollEndDate.ToShortDateString(),
-                                    EmployeePayPerHour = $"{g.First(e => e.DependentId == 0).EmployeePayPerHour:C2}",
-                                    NumberOfWorkHoursForPayPeriod = $"{g.First(e => e.DependentId == 0).NumberOfWorkHoursForPayPeriod}",
-                                    GrossSalaryForPayPeriod = $"{g.Sum(x => x.GrossSalaryForPayPeriod):C2}",
-                                    TotalDeductionForPayPeriod = $"{g.Sum(x => x.TotalDeductionForPayPeriod):C2}",
-                                    NetSalaryForPayPeriod = $"{(g.Sum(x => x.GrossSalaryForPayPeriod) - g.Sum(x => x.TotalDeductionForPayPeriod)):C2}",
-                                    YearToDateGrossSalary = $"{payPreviews.Where(pay => pay.PayRollEndDate <= g.First().PayRollEndDate).Sum(pay => pay.GrossSalaryForPayPeriod):C2}",
-                                    YearToDateNetSalary = $"{payPreviews.Where(pay => pay.PayRollEndDate <= g.First().PayRollEndDate).Sum(pay => pay.GrossSalaryForPayPeriod) - payPreviews.Where(pay => pay.PayRollEndDate <= g.First().PayRollEndDate).Sum(pay => pay.TotalDeductionForPayPeriod):C2}",
+                                    var yearToDateGrossSalary = payPreviews.Where(pay => pay.PayRollEndDate <= g.First().PayRollEndDate).Sum(pay => pay.GrossSalaryForPayPeriod);
+                                    var yearToDateDeduction = payPreviews.Where(pay => pay.PayRollEndDate <= g.First().PayRollEndDate).Sum(pay => pay.TotalDeductionForPayPeriod);
+                                    var totalDeductionForPayPeriod = g.Sum(x => x.TotalDeductionForPayPeriod);
+                                    var grossSalaryForPayPeriod = g.First(e => e.DependentId == 0).GrossSalaryForPayPeriod;
 
-                                    DeductionDetails = g.OrderBy(k => k.DependentId).Select(pp => new DeductionDetail()
+                                    return new PayrollPreviewDetail()
                                     {
-                                        IsEmployee = (pp.DependentId == 0),
-                                        Name = (pp.DependentId == 0) ? employee.FullName : employee.Dependents.First(dep => dep.DependentId == pp.DependentId).FullName,
-                                        TotalDeductionForPayPeriod = $"{pp.TotalDeductionForPayPeriod:C2}",
-                                        Relationship = (pp.DependentId == 0) ? "Employee" : employee.Dependents.First(dep => dep.DependentId == pp.DependentId).Relationship,
-                                        YearToDateDeduction = $"{payPreviews.Where(p => p.DependentId == pp.DependentId && p.PayRollEndDate <= pp.PayRollEndDate).Sum(p => p.TotalDeductionForPayPeriod):C2}"
-                                    }).ToList()
+                                        PayStart = g.First().PayrollStartDate.ToShortDateString(),
+                                        PayEnd = g.First().PayRollEndDate.ToShortDateString(),
+                                        EmployeePayPerHour = $"{g.First(e => e.DependentId == 0).EmployeePayPerHour:C2}",
+                                        NumberOfWorkHoursForPayPeriod = $"{g.First(e => e.DependentId == 0).NumberOfWorkHoursForPayPeriod}",
+                                        GrossSalaryForPayPeriod = $"{grossSalaryForPayPeriod:C2}",
+                                        TotalDeductionForPayPeriod = $"{totalDeductionForPayPeriod:C2}",
+                                        NetSalaryForPayPeriod = $"{(grossSalaryForPayPeriod - totalDeductionForPayPeriod):C2}",
+                                        YearToDateGrossSalary = $"{yearToDateGrossSalary:C2}",
+                                        YearToDateNetSalary = $"{(yearToDateGrossSalary - yearToDateDeduction):C2}",
+
+                                        DeductionDetails = g.OrderBy(k => k.DependentId).Select(pp => new DeductionDetail()
+                                        {
+                                            IsEmployee = (pp.DependentId == 0),
+                                            Name = (pp.DependentId == 0) ? employee.FullName : employee.Dependents.First(dep => dep.DependentId == pp.DependentId).FullName,
+                                            TotalDeductionForPayPeriod = $"{pp.TotalDeductionForPayPeriod:C2}",
+                                            Relationship = (pp.DependentId == 0) ? "Employee" : employee.Dependents.First(dep => dep.DependentId == pp.DependentId).Relationship,
+                                            YearToDateDeduction = $"{payPreviews.Where(p => p.DependentId == pp.DependentId && p.PayRollEndDate <= pp.PayRollEndDate).Sum(p => p.TotalDeductionForPayPeriod):C2}"
+                                        }).ToList()
+                                    };
                                 }
                         ).ToList();
         }

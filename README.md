@@ -1,5 +1,5 @@
 # Employee Management
-This solution is for managing employees and dependents and get a preview of the payroll for every period.
+This solution is for managing data related to employees and dependents and get a preview of the payroll for every pay period in the current year.
 Along with providing a facility to create/read/update/delete employee and dependents, this application calculates the pay preview per period, which includes benefit
 deductions for employee and dependents.
 The pay preview screen presents the following information per pay period:
